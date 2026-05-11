@@ -1,2 +1,1 @@
-# trouve-ton-artisan
 
