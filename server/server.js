@@ -1,19 +1,22 @@
 const app = require("./app");
 const { sequelize, ensureDatabaseExists } = require("./config/database");
 
+require("./models");
+
 const PORT = Number(process.env.PORT || 5000);
 
 async function startServer() {
   try {
     await ensureDatabaseExists();
-    await sequelize.authenticate();
+    await sequelize.sync({ alter: true });
+
+    console.log("Base synchronisee");
 
     app.listen(PORT, () => {
       console.log(`Serveur lance sur le port ${PORT}`);
-      console.log("Connexion DB OK");
     });
   } catch (error) {
-    console.error("Connexion MySQL impossible :", error.message);
+    console.error("Demarrage impossible :", error.message);
     process.exit(1);
   }
 }
