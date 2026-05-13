@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import api from "../services/api";
 
@@ -34,6 +35,12 @@ export default function Home() {
                 <p>{artisan.specialty}</p>
                 <p>{artisan.city}</p>
                 <p>* {artisan.rating}</p>
+                <Link
+                  to={`/artisans/${artisan.id}`}
+                  className="btn btn-primary"
+                >
+                  Voir le profil
+                </Link>
               </div>
             </div>
           </div>
