@@ -8,7 +8,7 @@ const PORT = Number(process.env.PORT || 5000);
 async function startServer() {
   try {
     await ensureDatabaseExists();
-    await sequelize.sync({ alter: true });
+    await sequelize.sync();
 
     console.log("Base synchronisee");
 
