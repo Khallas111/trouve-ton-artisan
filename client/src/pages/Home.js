@@ -82,6 +82,11 @@ export default function Home() {
             <div className="card h-100">
               <div className="card-body">
                 <h3>{artisan.name}</h3>
+                {artisan.top && (
+                  <span className="badge bg-warning text-dark mb-2">
+                    Top artisan
+                  </span>
+                )}
                 <p>{artisan.specialty}</p>
                 <p>{artisan.city}</p>
                 <p>* {artisan.rating}</p>
