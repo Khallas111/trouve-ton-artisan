@@ -1,106 +1,102 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
+import StepsSection from "../components/home/StepsSection";
+import TopArtisans from "../components/home/TopArtisans";
 import api from "../services/api";
 
 export default function Home() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [artisans, setArtisans] = useState([]);
-  const [error, setError] = useState("");
-
   const [categories, setCategories] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  const [search, setSearch] = useState("");
-
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const search = searchParams.get("q") ?? "";
+  const selectedCategory = searchParams.get("category") ?? "";
 
   useEffect(() => {
-    api
-      .get("/artisans")
-      .then((response) => {
-        setArtisans(response.data);
+    Promise.all([api.get("/artisans"), api.get("/categories")])
+      .then(([artisansResponse, categoriesResponse]) => {
+        setArtisans(artisansResponse.data);
+        setCategories(categoriesResponse.data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    api
-      .get("/categories")
-      .then((response) => {
-        setCategories(response.data);
+      .catch((fetchError) => {
+        console.log(fetchError);
+        setError("Impossible de charger les artisans pour le moment.");
       })
-      .catch((error) => {
-        console.log(error);
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
-  const filteredArtisans = artisans.filter((artisan) => {
-    const matchesSearch = artisan.name
-      .toLowerCase()
-      .includes(search.toLowerCase());
 
+  const filteredArtisans = artisans.filter((artisan) => {
+    const searchValue = search.trim().toLowerCase();
+    const searchableText = [
+      artisan.name,
+      artisan.specialty,
+      artisan.city,
+      artisan.Category?.name,
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+
+    const matchesSearch =
+      searchValue === "" || searchableText.includes(searchValue);
     const matchesCategory =
       selectedCategory === "" ||
       artisan.Category?.id === Number(selectedCategory);
 
     return matchesSearch && matchesCategory;
   });
+
+  const featuredArtisansSource = filteredArtisans.filter(
+    (artisan) => artisan.top,
+  );
+  const featuredArtisans = (
+    featuredArtisansSource.length > 0
+      ? featuredArtisansSource
+      : [...filteredArtisans].sort((firstArtisan, secondArtisan) => {
+          return (secondArtisan.rating ?? 0) - (firstArtisan.rating ?? 0);
+        })
+  ).slice(0, 3);
+
+  const handleCategoryChange = (categoryId) => {
+    const nextParams = new URLSearchParams(searchParams);
+
+    if (categoryId) {
+      nextParams.set("category", categoryId);
+    } else {
+      nextParams.delete("category");
+    }
+
+    setSearchParams(nextParams);
+  };
+
   return (
-    <div className="container mt-5">
-      <h1 className="mb-4">Trouve ton artisan</h1>
+    <div className="home-page">
+      <section className="home-surface">
+        <div className="site-shell">
+          {error ? (
+            <p className="home-state home-state--error">{error}</p>
+          ) : null}
 
-      {error ? <p className="text-danger">{error}</p> : null}
-      <div className="row mb-4">
-        <div className="col-md-6">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Rechercher un artisan..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          {!error && loading ? (
+            <p className="home-state">Chargement des artisans...</p>
+          ) : (
+            <>
+              <StepsSection />
+              <TopArtisans
+                artisans={featuredArtisans}
+                totalResults={filteredArtisans.length}
+                search={search}
+                selectedCategory={selectedCategory}
+              />
+            </>
+          )}
         </div>
-
-        <div className="col-md-6">
-          <select
-            className="form-select"
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            <option value="">Toutes les catégories</option>
-
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      <div className="row">
-        {filteredArtisans.map((artisan) => (
-          <div className="col-md-4 mb-4" key={artisan.id}>
-            <div className="card h-100">
-              <div className="card-body">
-                <h3>{artisan.name}</h3>
-                {artisan.top && (
-                  <span className="badge bg-warning text-dark mb-2">
-                    Top artisan
-                  </span>
-                )}
-                <p>{artisan.specialty}</p>
-                <p>{artisan.city}</p>
-                <p>* {artisan.rating}</p>
-                <Link
-                  to={`/artisans/${artisan.id}`}
-                  className="btn btn-primary"
-                >
-                  Voir le profil
-                </Link>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      </section>
     </div>
   );
 }

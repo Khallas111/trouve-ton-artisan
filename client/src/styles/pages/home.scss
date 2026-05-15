@@ -1,0 +1,491 @@
+.home-page {
+  padding-bottom: 36px;
+}
+
+.home-hero {
+  padding: 10px 0 24px;
+}
+
+.home-hero__panel,
+.home-surface {
+  background: var(--surface-color);
+  border-radius: 38px;
+  box-shadow: var(--shadow-soft);
+}
+
+.home-hero__panel {
+  display: grid;
+  gap: 28px;
+  padding: 34px;
+  border: 1px solid rgba(0, 73, 124, 0.08);
+}
+
+.home-hero__intro h1,
+.section-heading h2 {
+  margin: 0;
+  font-family: "Graphik Trial";
+  font-weight: 900;
+  color: var(--text-color);
+}
+
+.home-hero__intro h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+}
+
+.home-hero__intro p,
+.section-copy,
+.step-card p,
+.home-state,
+.home-hero__search-state,
+.artisan-card__about,
+.artisan-card__specialty {
+  font-family: "Graphik Trial";
+  font-weight: 400;
+  color: var(--primary-color);
+}
+
+.home-hero__intro p {
+  max-width: 700px;
+  margin: 14px 0 0;
+  line-height: 1.75;
+}
+
+.home-hero__filters {
+  display: grid;
+  gap: 16px;
+  padding: 24px;
+  background: var(--surface-muted);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+}
+
+.home-hero__filters-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-color);
+}
+
+.home-hero__filters-header span {
+  font-family: "Graphik Trial";
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.home-hero__filters-header strong {
+  font-family: "Graphik Trial";
+  font-weight: 500;
+  color: var(--primary-color);
+  font-size: 0.95rem;
+}
+
+.home-hero__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.home-hero__chips button {
+  font-family: "Graphik Trial";
+  font-weight: 500;
+  padding: 11px 18px;
+  border: 1px solid rgba(0, 73, 124, 0.16);
+  border-radius: 999px;
+  background: rgba(241, 248, 252, 0.92);
+  color: var(--text-color);
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.home-hero__chips button.is-active,
+.home-hero__chips button:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--page-background);
+  transform: translateY(-1px);
+}
+
+.home-hero__search-state {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.home-hero__search-state span {
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.home-surface {
+  padding: 54px 0 0;
+}
+
+.home-surface .site-shell {
+  padding-bottom: 54px;
+}
+
+.steps-section,
+.top-artisans {
+  padding: 0 34px;
+}
+
+.top-artisans {
+  margin-top: 54px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.section-heading h2 {
+  font-size: clamp(1.65rem, 3vw, 2.25rem);
+}
+
+.section-copy {
+  margin: 0 0 30px;
+  color: var(--text-color);
+  line-height: 1.75;
+}
+
+.section-marker {
+  width: 20px;
+  height: 4px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.section-marker--green {
+  background: var(--success-color);
+}
+
+.section-marker--coral {
+  background: var(--accent-color);
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.step-card {
+  padding: 22px;
+  background: rgba(241, 248, 252, 0.96);
+  border: 1px solid rgba(0, 73, 124, 0.08);
+  border-radius: 26px;
+  box-shadow: 0 16px 40px rgba(0, 73, 124, 0.06);
+}
+
+.step-card h3 {
+  margin: 0 0 12px;
+  font-family: "Graphik Trial";
+  font-weight: 600;
+  color: var(--primary-dark);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.step-card p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.step-visual {
+  position: relative;
+  height: 114px;
+  margin-bottom: 18px;
+  overflow: hidden;
+  border-radius: 22px;
+}
+
+.step-visual span {
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: rgba(56, 64, 80, 0.18);
+}
+
+.step-visual__circle,
+.step-visual__card {
+  position: absolute;
+  border-radius: 999px;
+}
+
+.step-visual__circle {
+  width: 72px;
+  height: 72px;
+  top: 20px;
+  left: 16px;
+}
+
+.step-visual__card {
+  width: 120px;
+  height: 72px;
+  right: 12px;
+  bottom: 16px;
+  border-radius: 20px;
+}
+
+.step-visual--blue {
+  background: linear-gradient(135deg, var(--page-background) 0%, rgba(0, 116, 199, 0.2) 100%);
+}
+
+.step-visual--blue .step-visual__circle {
+  background: rgba(0, 116, 199, 0.24);
+}
+
+.step-visual--blue .step-visual__card {
+  background: rgba(241, 248, 252, 0.82);
+}
+
+.step-visual--sand {
+  background: linear-gradient(135deg, rgba(130, 184, 100, 0.12) 0%, rgba(130, 184, 100, 0.34) 100%);
+}
+
+.step-visual--sand .step-visual__circle {
+  background: rgba(130, 184, 100, 0.28);
+}
+
+.step-visual--sand .step-visual__card {
+  background: rgba(241, 248, 252, 0.88);
+}
+
+.step-visual--violet {
+  background: linear-gradient(135deg, rgba(56, 64, 80, 0.12) 0%, rgba(0, 73, 124, 0.24) 100%);
+}
+
+.step-visual--violet .step-visual__circle {
+  background: rgba(56, 64, 80, 0.22);
+}
+
+.step-visual--violet .step-visual__card {
+  background: rgba(241, 248, 252, 0.85);
+}
+
+.step-visual--coral {
+  background: linear-gradient(135deg, rgba(205, 44, 46, 0.08) 0%, rgba(205, 44, 46, 0.24) 100%);
+}
+
+.step-visual--coral .step-visual__circle {
+  background: rgba(205, 44, 46, 0.24);
+}
+
+.step-visual--coral .step-visual__card {
+  background: rgba(241, 248, 252, 0.86);
+}
+
+.artisan-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.artisan-card {
+  overflow: hidden;
+  border-radius: 28px;
+  background: rgba(241, 248, 252, 0.96);
+  box-shadow: 0 18px 42px rgba(0, 73, 124, 0.1);
+}
+
+.artisan-card__visual {
+  position: relative;
+  height: 272px;
+  overflow: hidden;
+}
+
+.artisan-card__visual-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 1;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(241, 248, 252, 0.92);
+  font-family: "Graphik Trial";
+  color: var(--primary-dark);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.artisan-card__visual-shape {
+  position: absolute;
+  border-radius: 999px;
+}
+
+.artisan-card__visual-shape--large {
+  width: 270px;
+  height: 270px;
+  right: -32px;
+  bottom: -90px;
+  background: rgba(241, 248, 252, 0.22);
+}
+
+.artisan-card__visual-shape--small {
+  width: 150px;
+  height: 150px;
+  left: -26px;
+  top: 70px;
+  background: rgba(241, 248, 252, 0.32);
+}
+
+.artisan-card__visual--amber {
+  background: linear-gradient(135deg, var(--success-color) 0%, var(--primary-dark) 100%);
+}
+
+.artisan-card__visual--rose {
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--text-color) 100%);
+}
+
+.artisan-card__visual--slate {
+  background: linear-gradient(135deg, var(--text-color) 0%, var(--primary-dark) 100%);
+}
+
+.artisan-card__visual--ocean {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+}
+
+.artisan-card__visual--teal {
+  background: linear-gradient(135deg, var(--success-color) 0%, var(--primary-color) 100%);
+}
+
+.artisan-card__content {
+  display: grid;
+  gap: 14px;
+  padding: 24px;
+}
+
+.artisan-card__eyebrow {
+  margin: 0;
+  font-family: "Graphik Trial";
+  font-weight: 500;
+  color: var(--primary-color);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.artisan-card h3 {
+  margin: 0;
+  font-family: "Graphik Trial";
+  font-weight: 600;
+  font-size: 1.45rem;
+  line-height: 1.15;
+}
+
+.artisan-card__specialty,
+.artisan-card__about {
+  margin: 0;
+  color: var(--text-color);
+  line-height: 1.65;
+}
+
+.artisan-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.artisan-card__rating span {
+  margin-left: 6px;
+  font-family: "Graphik Trial";
+  font-weight: 500;
+  color: var(--primary-dark);
+}
+
+.artisan-card__star {
+  width: 18px;
+  height: 18px;
+  fill: rgba(56, 64, 80, 0.2);
+}
+
+.artisan-card__star.is-filled {
+  fill: var(--primary-color);
+}
+
+.artisan-card__actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: var(--page-background);
+  font-family: "Graphik Trial";
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.artisan-card__actions {
+  display: flex;
+  justify-content: center;
+}
+
+.home-state {
+  margin: 0;
+  padding: 20px 24px;
+  background: rgba(241, 248, 252, 0.88);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+}
+
+.home-state--error {
+  color: var(--accent-color);
+  background: rgba(205, 44, 46, 0.08);
+  border-color: rgba(205, 44, 46, 0.18);
+}
+
+@media (max-width: 1100px) {
+  .steps-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .artisan-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .home-hero__panel,
+  .home-surface {
+    border-radius: 28px;
+  }
+
+  .home-hero__panel,
+  .steps-section,
+  .top-artisans {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .home-hero__panel {
+    padding-top: 26px;
+    padding-bottom: 26px;
+  }
+
+  .home-surface {
+    padding-top: 36px;
+  }
+
+  .steps-grid,
+  .artisan-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .artisan-card__visual {
+    height: 236px;
+  }
+}
