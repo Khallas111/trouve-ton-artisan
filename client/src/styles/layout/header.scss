@@ -12,12 +12,15 @@
 .brand-mark {
   display: inline-flex;
   align-items: center;
+  flex: 0 1 320px;
+  min-width: 0;
   text-decoration: none;
 }
 
 .brand-mark img {
   display: block;
-  width: clamp(220px, 24vw, 320px);
+  width: clamp(275px, 30vw, 400px);
+  max-width: 100%;
   height: auto;
 }
 
@@ -25,10 +28,8 @@
   display: flex;
   align-items: center;
   flex: 0 1 360px;
-  background: rgba(241, 248, 252, 0.92);
   border: 1px solid rgba(0, 73, 124, 0.22);
   border-radius: 18px;
-  box-shadow: 0 12px 32px rgba(0, 73, 124, 0.08);
   overflow: hidden;
 }
 
@@ -117,5 +118,13 @@
 @media (max-width: 560px) {
   .site-header {
     padding-top: 20px;
+  }
+
+  .brand-mark {
+    flex-basis: 255px;
+  }
+
+  .brand-mark img {
+    width: clamp(210px, 64vw, 270px);
   }
 }

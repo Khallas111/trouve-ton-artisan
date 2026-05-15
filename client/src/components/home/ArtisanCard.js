@@ -1,5 +1,20 @@
 import { Link } from "react-router-dom";
 
+import alimentationImage from "../../assets/images/Alimentation.jpg";
+import batimentImage from "../../assets/images/Bâtiment.jpg";
+import boulangerImage from "../../assets/images/Boulanger.png";
+import menuisierImage from "../../assets/images/Menuisier.png";
+import serviceImage from "../../assets/images/Service.jpg";
+import servicesImage from "../../assets/images/Services.png";
+
+function normalizeText(value) {
+  return (value ?? "")
+    .toString()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
 function Star({ fillRatio, gradientId }) {
   const normalizedFillRatio = Math.max(0, Math.min(1, fillRatio));
   const fillPercent = `${normalizedFillRatio * 100}%`;
@@ -34,8 +49,9 @@ function Star({ fillRatio, gradientId }) {
 }
 
 function getVisualTheme(artisan) {
-  const fingerprint =
-    `${artisan.specialty ?? ""} ${artisan.Category?.name ?? ""}`.toLowerCase();
+  const fingerprint = normalizeText(
+    `${artisan.specialty ?? ""} ${artisan.Category?.name ?? ""}`,
+  );
 
   if (fingerprint.includes("boul") || fingerprint.includes("aliment")) {
     return "amber";
@@ -56,17 +72,75 @@ function getVisualTheme(artisan) {
   return "teal";
 }
 
+function getArtisanVisual(artisan) {
+  const specialty = normalizeText(artisan.specialty);
+  const category = normalizeText(artisan.Category?.name);
+
+  if (specialty.includes("boulang")) {
+    return {
+      src: boulangerImage,
+      alt: `Illustration du metier ${artisan.specialty ?? artisan.name}`,
+      position: "center top",
+    };
+  }
+
+  if (specialty.includes("menuis")) {
+    return {
+      src: menuisierImage,
+      alt: `Illustration du metier ${artisan.specialty ?? artisan.name}`,
+      position: "center top",
+    };
+  }
+
+  if (category.includes("aliment")) {
+    return {
+      src: alimentationImage,
+      alt: `Illustration de la categorie ${artisan.Category?.name ?? "alimentation"}`,
+      position: "center top",
+    };
+  }
+
+  if (category.includes("batiment")) {
+    return {
+      src: batimentImage,
+      alt: `Illustration de la categorie ${artisan.Category?.name ?? "batiment"}`,
+      position: "center top",
+    };
+  }
+
+  if (category.includes("service")) {
+    return {
+      src: servicesImage,
+      alt: `Illustration de la categorie ${artisan.Category?.name ?? "services"}`,
+      position: "center top",
+    };
+  }
+
+  return {
+    src: serviceImage,
+    alt: `Illustration du metier ${artisan.specialty ?? artisan.name}`,
+    position: "center top",
+  };
+}
+
 export default function ArtisanCard({ artisan }) {
   const normalizedRating = Math.max(0, Math.min(5, Number(artisan.rating) || 0));
   const theme = getVisualTheme(artisan);
   const categoryName = artisan.Category?.name ?? "Artisan recommande";
+  const visual = getArtisanVisual(artisan);
 
   return (
     <article className="artisan-card">
       <div className={`artisan-card__visual artisan-card__visual--${theme}`}>
+        <img
+          src={visual.src}
+          alt={visual.alt}
+          className="artisan-card__visual-image"
+          loading="lazy"
+          style={{ objectPosition: visual.position }}
+        />
+        <div className="artisan-card__visual-overlay" />
         <div className="artisan-card__visual-badge">{categoryName}</div>
-        <div className="artisan-card__visual-shape artisan-card__visual-shape--large" />
-        <div className="artisan-card__visual-shape artisan-card__visual-shape--small" />
       </div>
 
       <div className="artisan-card__content">

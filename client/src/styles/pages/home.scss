@@ -202,88 +202,56 @@
 
 .step-visual {
   position: relative;
-  height: 114px;
+  height: 164px;
   margin-bottom: 18px;
   overflow: hidden;
   border-radius: 22px;
 }
 
+.step-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 .step-visual span {
   position: absolute;
   right: 14px;
-  bottom: 12px;
-  font-size: 1.85rem;
-  font-weight: 700;
-  color: rgba(56, 64, 80, 0.18);
-}
-
-.step-visual__circle,
-.step-visual__card {
-  position: absolute;
+  bottom: 14px;
+  z-index: 1;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
   border-radius: 999px;
+  background: rgba(241, 248, 252, 0.84);
+  backdrop-filter: blur(6px);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-dark);
 }
 
-.step-visual__circle {
-  width: 72px;
-  height: 72px;
-  top: 20px;
-  left: 16px;
-}
-
-.step-visual__card {
-  width: 120px;
-  height: 72px;
-  right: 12px;
-  bottom: 16px;
-  border-radius: 20px;
+.step-visual__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(56, 64, 80, 0.06) 0%, rgba(56, 64, 80, 0.38) 100%);
 }
 
 .step-visual--blue {
   background: linear-gradient(135deg, var(--page-background) 0%, rgba(0, 116, 199, 0.2) 100%);
 }
 
-.step-visual--blue .step-visual__circle {
-  background: rgba(0, 116, 199, 0.24);
-}
-
-.step-visual--blue .step-visual__card {
-  background: rgba(241, 248, 252, 0.82);
-}
-
 .step-visual--sand {
   background: linear-gradient(135deg, rgba(130, 184, 100, 0.12) 0%, rgba(130, 184, 100, 0.34) 100%);
-}
-
-.step-visual--sand .step-visual__circle {
-  background: rgba(130, 184, 100, 0.28);
-}
-
-.step-visual--sand .step-visual__card {
-  background: rgba(241, 248, 252, 0.88);
 }
 
 .step-visual--violet {
   background: linear-gradient(135deg, rgba(56, 64, 80, 0.12) 0%, rgba(0, 73, 124, 0.24) 100%);
 }
 
-.step-visual--violet .step-visual__circle {
-  background: rgba(56, 64, 80, 0.22);
-}
-
-.step-visual--violet .step-visual__card {
-  background: rgba(241, 248, 252, 0.85);
-}
-
 .step-visual--coral {
   background: linear-gradient(135deg, rgba(205, 44, 46, 0.08) 0%, rgba(205, 44, 46, 0.24) 100%);
-}
-
-.step-visual--coral .step-visual__circle {
-  background: rgba(205, 44, 46, 0.24);
-}
-
-.step-visual--coral .step-visual__card {
-  background: rgba(241, 248, 252, 0.86);
 }
 
 .artisan-grid {
@@ -305,6 +273,18 @@
   overflow: hidden;
 }
 
+.artisan-card__visual-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.artisan-card__visual-overlay {
+  position: absolute;
+  inset: 0;
+}
+
 .artisan-card__visual-badge {
   position: absolute;
   top: 16px;
@@ -317,27 +297,6 @@
   color: var(--primary-dark);
   font-size: 0.82rem;
   font-weight: 500;
-}
-
-.artisan-card__visual-shape {
-  position: absolute;
-  border-radius: 999px;
-}
-
-.artisan-card__visual-shape--large {
-  width: 270px;
-  height: 270px;
-  right: -32px;
-  bottom: -90px;
-  background: rgba(241, 248, 252, 0.22);
-}
-
-.artisan-card__visual-shape--small {
-  width: 150px;
-  height: 150px;
-  left: -26px;
-  top: 70px;
-  background: rgba(241, 248, 252, 0.32);
 }
 
 .artisan-card__visual--amber {
