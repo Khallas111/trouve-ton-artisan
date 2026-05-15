@@ -1,14 +1,11 @@
-import Navbar from "./Navbar";
-
+import Header from "./Header";
 import Footer from "./Footer";
 
 export default function Layout({ children }) {
   return (
     <>
-      <Navbar />
-
-      <main>{children}</main>
-
+      <Header />
+      <main className="site-main">{children}</main>
       <Footer />
     </>
   );
