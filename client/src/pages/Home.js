@@ -51,16 +51,14 @@ export default function Home() {
     return matchesSearch && matchesCategory;
   });
 
-  const featuredArtisansSource = filteredArtisans.filter(
-    (artisan) => artisan.top,
-  );
-  const featuredArtisans = (
-    featuredArtisansSource.length > 0
-      ? featuredArtisansSource
-      : [...filteredArtisans].sort((firstArtisan, secondArtisan) => {
-          return (secondArtisan.rating ?? 0) - (firstArtisan.rating ?? 0);
-        })
-  ).slice(0, 3);
+  const topArtisans = filteredArtisans.filter((artisan) => artisan.top);
+  const featuredArtisansSource =
+    topArtisans.length > 0 ? topArtisans : filteredArtisans;
+  const featuredArtisans = [...featuredArtisansSource]
+    .sort((firstArtisan, secondArtisan) => {
+      return (secondArtisan.rating ?? 0) - (firstArtisan.rating ?? 0);
+    })
+    .slice(0, 3);
 
   const handleCategoryChange = (categoryId) => {
     const nextParams = new URLSearchParams(searchParams);

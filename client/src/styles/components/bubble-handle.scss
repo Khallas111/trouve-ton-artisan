@@ -1,0 +1,26 @@
+.bubble-handle {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  --bubble-width: clamp(340px, 92vw, 1050px);
+  --bubble-height: clamp(78px, 14vw, 150px);
+  --bubble-tail-width: clamp(26px, 4vw, 40px);
+  --bubble-tail-height: clamp(20px, 3vw, 30px);
+}
+
+.bubble-handle__body {
+  display: block;
+  width: var(--bubble-width);
+  height: var(--bubble-height);
+  border-radius: 999px;
+  background: #fff;
+}
+
+.bubble-handle__tail {
+  display: block;
+  width: var(--bubble-tail-width);
+  height: var(--bubble-tail-height);
+  margin-top: -1px;
+  background: #fff;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}

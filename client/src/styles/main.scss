@@ -1,5 +1,6 @@
 @import "./layout/header";
 @import "./layout/footer";
+@import "./components/bubble-handle";
 @import "./pages/home";
 
 @font-face {
@@ -78,9 +79,9 @@ html {
 
 body {
   margin: 0;
-  background:
-    radial-gradient(circle at top left, rgba(241, 248, 252, 0.95), transparent 34%),
-    linear-gradient(180deg, rgba(0, 116, 199, 0.08) 0%, var(--page-background) 100%);
+  padding-left: 15px;
+  padding-right: 15px;
+  
   color: var(--text-color);
   font-family: "Graphik Trial";
   font-weight: 400;
@@ -161,10 +162,7 @@ samp {
   display: block;
 }
 
-.site-shell {
-  width: min(1120px, calc(100% - 32px));
-  margin: 0 auto;
-}
+
 
 .sr-only {
   position: absolute;
