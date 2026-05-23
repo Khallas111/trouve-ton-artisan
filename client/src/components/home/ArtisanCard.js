@@ -148,7 +148,11 @@ export default function ArtisanCard({ artisan }) {
         <h3>{artisan.name}</h3>
         <p className="artisan-card__specialty">{artisan.specialty}</p>
 
-        <div className="artisan-card__rating" aria-label={`Note ${artisan.rating ?? 0} sur 5`}>
+        <div
+          className="artisan-card__rating"
+          role="img"
+          aria-label={`Note ${normalizedRating.toFixed(1)} sur 5`}
+        >
           {Array.from({ length: 5 }, (_, index) => {
             const starFillRatio = normalizedRating - index;
 

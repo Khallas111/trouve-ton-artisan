@@ -74,8 +74,10 @@ export default function Home() {
 
   return (
     <div className="home-page">
-      <section className="home-surface">
+      <div className="home-surface">
         <div className="site-shell">
+          <h1 className="sr-only">Trouve ton artisan</h1>
+
           {error ? (
             <p className="home-state home-state--error">{error}</p>
           ) : null}
@@ -94,7 +96,7 @@ export default function Home() {
             </>
           )}
         </div>
-      </section>
+      </div>
     </div>
   );
 }
