@@ -169,6 +169,7 @@ export default function ArtisanDetail() {
 
             <div
               className="artisan-detail__rating"
+              role="img"
               aria-label={`Note ${normalizedRating.toFixed(1)} sur 5`}
             >
               <div className="artisan-detail__stars">
