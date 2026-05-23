@@ -2,6 +2,13 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/logos/Logo.png";
 
+const navigationLinks = [
+  { label: "Bâtiment", to: "/batiment" },
+  { label: "Alimentation", to: "/alimentation" },
+  { label: "Fabrication", to: "/fabrication" },
+  { label: "Services", to: "/services" },
+];
+
 function SearchIcon() {
   return (
     <svg
@@ -21,11 +28,16 @@ export default function Header() {
   const location = useLocation();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     setQuery(params.get("q") ?? "");
   }, [location.search]);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname, location.search]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -76,10 +88,32 @@ export default function Header() {
             </button>
           </form>
 
-          <a className="header-menu" href="#footer-navigation">
-            <span className="header-menu__lines" aria-hidden="true" />
-            <span>Menu</span>
-          </a>
+          <div className="header-menu">
+            <button
+              type="button"
+              className="header-menu__toggle"
+              aria-expanded={isMenuOpen}
+              aria-controls="header-navigation-dropdown"
+              onClick={() => setIsMenuOpen((currentState) => !currentState)}
+            >
+              <span className="header-menu__lines" aria-hidden="true" />
+              <span>Menu</span>
+            </button>
+
+            {isMenuOpen ? (
+              <nav
+                className="header-menu__dropdown"
+                id="header-navigation-dropdown"
+                aria-label="Navigation des catégories"
+              >
+                {navigationLinks.map((link) => (
+                  <Link key={link.to} to={link.to}>
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            ) : null}
+          </div>
         </div>
       </div>
     </header>
