@@ -11,6 +11,8 @@ const SORT_OPTIONS = [
   { id: "nearest", label: "Plus proche de ma position" },
 ];
 
+// Les coordonnees locales suffisent pour le jeu de donnees regional actuel
+// et evitent d'ajouter une dependance externe juste pour le tri.
 const CITY_COORDINATES = {
   "aix-les-bains": { latitude: 45.6885, longitude: 5.9156 },
   annecy: { latitude: 45.8992, longitude: 6.1294 },
@@ -115,6 +117,7 @@ export default function CategoryArtisansPage({
       return undefined;
     }
 
+    // Ferme le menu deroulant si l'utilisateur clique en dehors.
     const handlePointerDown = (event) => {
       if (!sortMenuRef.current?.contains(event.target)) {
         setIsSortMenuOpen(false);
@@ -153,6 +156,8 @@ export default function CategoryArtisansPage({
 
     if (selectedSort === "recent") {
       return artisansToSort.sort((firstArtisan, secondArtisan) => {
+        // On privilegie les vraies dates de creation quand elles existent,
+        // puis on retombe sur l'id pour garder un ordre recent stable.
         const firstTimestamp =
           Date.parse(firstArtisan.createdAt ?? "") ||
           Number(firstArtisan.id) ||
@@ -168,6 +173,7 @@ export default function CategoryArtisansPage({
 
     if (selectedSort === "nearest" && userPosition) {
       return artisansToSort.sort((firstArtisan, secondArtisan) => {
+        // Les villes inconnues sont poussees en fin de liste au lieu de bloquer le tri.
         const firstCoordinates =
           CITY_COORDINATES[normalizeText(firstArtisan.city)];
         const secondCoordinates =
@@ -213,6 +219,7 @@ export default function CategoryArtisansPage({
       return;
     }
 
+    // Le tri "proximite" est le seul qui depend des permissions du navigateur.
     if (!navigator.geolocation) {
       setLocationError(
         "Le tri par proximite n'est pas disponible sur cet appareil. Les artisans restent tries par note.",
