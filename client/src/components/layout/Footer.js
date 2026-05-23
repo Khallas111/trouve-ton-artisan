@@ -4,6 +4,17 @@ import telephoneIcon from "../../assets/icons/telephone(2).png";
 import tramIcon from "../../assets/icons/tram(1).png";
 import BubbleHandle from "../ui/BubbleHandle";
 
+const footerLinks = [
+  "Marchés publics",
+  "Contact",
+  "Mentions légales",
+  "Données personnelles",
+  "Politique des cookies",
+  "Accessibilité",
+  "Gestion des cookies",
+  "Presse",
+];
+
 export default function Footer() {
   return (
     <footer className="site-footer" id="footer-navigation">
@@ -72,14 +83,11 @@ export default function Footer() {
           </div>
 
           <nav className="site-footer__links" aria-label="Liens du pied de page">
-            <Link to="/">Marches publics</Link>
-            <Link to="/">Contact</Link>
-            <Link to="/">Mentions legales</Link>
-            <Link to="/">Donnees personnelles</Link>
-            <Link to="/">Politique des cookies</Link>
-            <Link to="/">Accessibilite</Link>
-            <Link to="/">Gestion des cookies</Link>
-            <Link to="/">Presse</Link>
+            {footerLinks.map((label) => (
+              <Link key={label} to="/construction">
+                {label}
+              </Link>
+            ))}
           </nav>
         </div>
       </div>
