@@ -66,6 +66,20 @@
   font-family: "Graphik Trial";
   font-weight: 500;
   cursor: pointer;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.category-sort__toggle:hover,
+.category-sort__toggle:focus-visible {
+  background: #ffffff;
+  border-color: rgba(0, 116, 199, 0.28);
+  box-shadow: 0 12px 22px rgba(0, 73, 124, 0.12);
+  transform: translateY(-1px);
+  outline: none;
 }
 
 .category-sort__label {

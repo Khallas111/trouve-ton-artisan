@@ -181,6 +181,19 @@
   box-shadow: 0 10px 18px rgba(0, 73, 124, 0.22);
   color: #ffffff;
   font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+.artisan-detail__actions button:hover,
+.artisan-detail__actions button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 26px rgba(0, 73, 124, 0.28);
+  filter: brightness(1.03);
+  outline: none;
 }
 
 @media (max-width: 767px) {
