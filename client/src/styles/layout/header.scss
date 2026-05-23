@@ -56,6 +56,19 @@
   border: 0;
   background: transparent;
   color: var(--primary-color);
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    color 180ms ease,
+    background-color 180ms ease;
+}
+
+.header-search button:hover,
+.header-search button:focus-visible {
+  background: rgba(0, 116, 199, 0.08);
+  color: var(--primary-dark);
+  transform: scale(1.04);
+  outline: none;
 }
 
 .header-search__icon {
@@ -81,6 +94,14 @@
   font-weight: 700;
   text-decoration: none;
   cursor: pointer;
+  transition:
+    transform 180ms ease,
+    color 180ms ease;
+}
+
+.header-menu__toggle:hover {
+  color: var(--primary-dark);
+  transform: translateY(-1px);
 }
 
 .header-menu__toggle:focus-visible {

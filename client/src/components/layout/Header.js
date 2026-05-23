@@ -49,17 +49,8 @@ export default function Header() {
       nextParams.set("q", trimmedQuery);
     }
 
-    if (location.pathname === "/") {
-      const currentParams = new URLSearchParams(location.search);
-      const category = currentParams.get("category");
-
-      if (category) {
-        nextParams.set("category", category);
-      }
-    }
-
     navigate({
-      pathname: "/",
+      pathname: "/recherche",
       search: nextParams.toString() ? `?${nextParams.toString()}` : "",
     });
   };
