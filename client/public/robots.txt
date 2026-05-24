@@ -6,5 +6,5 @@ Disallow: /api/docs
 Disallow: /api/docs/
 Disallow: /api/docs.json
 
-# Ajoutez ici l'URL absolue du sitemap une fois le domaine final connu.
-# Sitemap: https://www.votre-domaine.fr/sitemap.xml
+
+Sitemap: https://trouve-ton-artisan-jgfm.onrender.com/sitemap.xml
