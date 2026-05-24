@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import logo from "../../assets/logos/Logo.png";
 
-const navigationLinks = [
-  { label: "Bâtiment", to: "/batiment" },
-  { label: "Alimentation", to: "/alimentation" },
-  { label: "Fabrication", to: "/fabrication" },
-  { label: "Services", to: "/services" },
-];
+import logo from "../../assets/logos/Logo.png";
+import api from "../../services/api";
+
+function normalizeCategoryToPath(name) {
+  return `/${(name ?? "")
+    .toString()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()}`;
+}
 
 function SearchIcon() {
   return (
@@ -29,6 +32,7 @@ export default function Header() {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -38,6 +42,27 @@ export default function Header() {
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname, location.search]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    api
+      .get("/categories")
+      .then((response) => {
+        if (!isMounted) {
+          return;
+        }
+
+        setCategories(response.data);
+      })
+      .catch((fetchError) => {
+        console.log(fetchError);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -95,11 +120,14 @@ export default function Header() {
               <nav
                 className="header-menu__dropdown"
                 id="header-navigation-dropdown"
-                aria-label="Navigation des catégories"
+                aria-label="Navigation des categories"
               >
-                {navigationLinks.map((link) => (
-                  <Link key={link.to} to={link.to}>
-                    {link.label}
+                {categories.map((category) => (
+                  <Link
+                    key={category.id}
+                    to={normalizeCategoryToPath(category.name)}
+                  >
+                    {category.name}
                   </Link>
                 ))}
               </nav>
