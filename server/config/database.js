@@ -1,3 +1,4 @@
+const fs = require("fs");
 const mysql = require("mysql2/promise");
 const { Sequelize } = require("sequelize");
 
@@ -11,6 +12,34 @@ const databaseConfig = {
   port: Number(process.env.DB_PORT || 3306),
 };
 
+function toBoolean(value, defaultValue = false) {
+  if (value === undefined) {
+    return defaultValue;
+  }
+
+  return value === "true";
+}
+
+function getSslConfig() {
+  if (!toBoolean(process.env.DB_SSL, false)) {
+    return undefined;
+  }
+
+  const sslConfig = {
+    rejectUnauthorized: toBoolean(process.env.DB_SSL_REJECT_UNAUTHORIZED, true),
+  };
+
+  if (process.env.DB_SSL_CA_BASE64) {
+    sslConfig.ca = Buffer.from(process.env.DB_SSL_CA_BASE64, "base64").toString("utf8");
+  } else if (process.env.DB_SSL_CA_PATH) {
+    sslConfig.ca = fs.readFileSync(process.env.DB_SSL_CA_PATH, "utf8");
+  }
+
+  return sslConfig;
+}
+
+const sslConfig = getSslConfig();
+
 const sequelize = new Sequelize(
   databaseConfig.database,
   databaseConfig.username,
@@ -20,15 +49,25 @@ const sequelize = new Sequelize(
     port: databaseConfig.port,
     dialect: "mysql",
     logging: false,
+    dialectOptions: sslConfig
+      ? {
+          ssl: sslConfig,
+        }
+      : undefined,
   },
 );
 
 async function ensureDatabaseExists() {
+  if (toBoolean(process.env.DB_SKIP_CREATE, false)) {
+    return;
+  }
+
   const connection = await mysql.createConnection({
     host: databaseConfig.host,
     port: databaseConfig.port,
     user: databaseConfig.username,
     password: databaseConfig.password,
+    ssl: sslConfig,
   });
 
   await connection.query(
