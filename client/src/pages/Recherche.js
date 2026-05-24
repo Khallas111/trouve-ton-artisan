@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
+import Seo from "../components/common/Seo";
 import ArtisanCard from "../components/home/ArtisanCard";
 import api from "../services/api";
 
@@ -91,6 +92,16 @@ export default function Recherche() {
 
   return (
     <section className="search-page">
+      <Seo
+        title={query.trim() ? `Recherche : ${query.trim()}` : "Recherche d'artisans"}
+        description={
+          query.trim()
+            ? `Consultez les artisans correspondant a la recherche ${query.trim()} sur Trouve ton artisan.`
+            : "Utilisez la recherche pour trouver un artisan selon votre besoin, votre metier ou votre ville."
+        }
+        noIndex
+      />
+
       <div className="site-shell">
         <div className="search-page__panel">
           <div className="section-heading">

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import Seo from "../common/Seo";
 import ArtisanCard from "../home/ArtisanCard";
 import api from "../../services/api";
 
@@ -251,6 +252,12 @@ export default function CategoryArtisansPage({
 
   return (
     <section className="category-page">
+      <Seo
+        title={`${title} en Auvergne-Rhone-Alpes`}
+        description={description}
+        canonicalPath={`/${normalizeText(title)}`}
+      />
+
       <div className="site-shell">
         <div className="category-page__panel">
           <div className="category-page__intro">
