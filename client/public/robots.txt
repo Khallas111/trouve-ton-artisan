@@ -1,3 +1,10 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+
+# Les pages de documentation API n'ont pas vocation a etre indexees.
+Disallow: /api/docs
+Disallow: /api/docs/
+Disallow: /api/docs.json
+
+# Ajoutez ici l'URL absolue du sitemap une fois le domaine final connu.
+# Sitemap: https://www.votre-domaine.fr/sitemap.xml

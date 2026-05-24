@@ -1,9 +1,17 @@
 import { Link } from "react-router-dom";
+
+import Seo from "../components/common/Seo";
 import errorIllustration from "../assets/illustrations/Img-404.png";
 
 export default function NotFoundPage() {
   return (
     <section className="search-page search-page--not-found">
+      <Seo
+        title="Page introuvable"
+        description="La page demandee est introuvable. Revenez a l'accueil pour retrouver un artisan."
+        noIndex
+      />
+
       <div className="search-page__not-found-background">
         <img
           className="search-page__illustration search-page__illustration--full"

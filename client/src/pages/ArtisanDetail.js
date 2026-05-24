@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import Seo from "../components/common/Seo";
 import alimentationImage from "../assets/images/Alimentation.jpg";
 import batimentImage from "../assets/images/Bâtiment.jpg";
 import boulangerImage from "../assets/images/Boulanger.png";
@@ -151,6 +152,20 @@ export default function ArtisanDetail() {
 
   return (
     <section className="artisan-detail-page">
+      <Seo
+        title={
+          artisan.specialty
+            ? `${artisan.name} - ${artisan.specialty}`
+            : artisan.name
+        }
+        description={
+          artisan.about ||
+          `${artisan.name} exerce a ${artisan.city || "Auvergne-Rhone-Alpes"} et peut etre contacte via sa fiche artisan.`
+        }
+        type="profile"
+        canonicalPath={`/artisans/${artisan.id}`}
+      />
+
       <div className="site-shell">
         <article className="artisan-detail">
           <div className="artisan-detail__hero">

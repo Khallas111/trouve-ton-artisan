@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
+import Seo from "../components/common/Seo";
 import StepsSection from "../components/home/StepsSection";
 import TopArtisans from "../components/home/TopArtisans";
 import api from "../services/api";
 
 export default function Home() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [artisans, setArtisans] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -16,10 +16,10 @@ export default function Home() {
   const selectedCategory = searchParams.get("category") ?? "";
 
   useEffect(() => {
-    Promise.all([api.get("/artisans"), api.get("/categories")])
-      .then(([artisansResponse, categoriesResponse]) => {
+    api
+      .get("/artisans")
+      .then((artisansResponse) => {
         setArtisans(artisansResponse.data);
-        setCategories(categoriesResponse.data);
       })
       .catch((fetchError) => {
         console.log(fetchError);
@@ -60,20 +60,14 @@ export default function Home() {
     })
     .slice(0, 3);
 
-  const handleCategoryChange = (categoryId) => {
-    const nextParams = new URLSearchParams(searchParams);
-
-    if (categoryId) {
-      nextParams.set("category", categoryId);
-    } else {
-      nextParams.delete("category");
-    }
-
-    setSearchParams(nextParams);
-  };
-
   return (
     <div className="home-page">
+      <Seo
+        title="Trouver un artisan en Auvergne-Rhone-Alpes"
+        description="Trouvez rapidement un artisan de confiance en Auvergne-Rhone-Alpes selon votre categorie, votre ville et votre besoin."
+        canonicalPath="/"
+      />
+
       <div className="home-surface">
         <div className="site-shell">
           <h1 className="sr-only">Trouve ton artisan</h1>
